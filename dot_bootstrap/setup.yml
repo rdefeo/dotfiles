@@ -8,32 +8,54 @@
   tasks:
     - name: Get my user
       ansible.builtin.set_fact:
-	remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
-    - name: Install packages
-      ansible.builtin.dnf:
-	name:
-	  - git
-	  - htop
-	  - batcat
-	  - tmux
-	  - emacs-nox
-	state: present
+        remote_regular_user: "{{ ansible_env.SUDO_USER or ansible_user_id }}"
+
     - name: Change shell to bash
       ansible.builtin.user:
-	name: "{{ remote_regular_user }}"
-	shell: /usr/bin/bash
+        name: "{{ remote_regular_user }}"
+        shell: /usr/bin/bash
 
-    - name: Add Visual Studio Code Repo
-      ansible.builtin.yum_repository:
-        name: vscode
-        description: Visual Studio Code
-        baseurl: https://packages.microsoft.com/yumrepos/vscode
-        gpgkey: https://packages.microsoft.com/keys/microsoft.asc
-        gpgcheck: true
-        enabled: true
+    # VSCode Installation - deals with any residual installs first
+    - name: Remove old VS Code repository files and Microsoft keyring files if present
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/apt/sources.list.d/vscode.list
+        - /etc/apt/sources.list.d/code.list
+        - /etc/apt/sources.list.d/microsoft-prod.list
+        - /usr/share/keyrings/microsoft.gpg
+        - /usr/share/keyrings/packages.microsoft.gpg
 
-    - name: Install VS Code
-      ansible.builtin.dnf:
-        name: code
-        state: present
-    
+    - name: Add Microsoft GPG key for VS Code
+      ansible.builtin.shell: |
+        curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor -o /usr/share/keyrings/packages.microsoft.gpg
+      args:
+        creates: /usr/share/keyrings/packages.microsoft.gpg
+
+    - name: Add VS Code repository (signed by the key)
+      ansible.builtin.copy:
+        dest: /etc/apt/sources.list.d/vscode.list
+        content: |
+          deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.visualstudio.com/repos/vscode stable main
+
+    - name: Install packages
+      ansible.builtin.apt:
+       name:
+         - git
+         - htop
+         - curl
+         - bat
+         - gpg
+         - tmux
+         - emacs-nox
+         - neofetch
+         - apt-transport-https
+         - elpa-yaml-mode
+         - code
+       state: present
+
+    # - name: Install Visual Studio Code
+    #   ansible.builtin.apt:
+    #     name: code
+    #     state: present
