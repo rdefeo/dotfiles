@@ -1,0 +1,10 @@
+# Setup Advent of Code aliases
+source ~/src/advent/python/aliases.sh
+
+# bat - colorized cat, based on file type
+alias bat="batcat --style snip --theme 'Visual Studio Dark+'"
+
+alias qflipper=~/src/flipperzero/qFlipper/build/qFlipper-x86_64.AppImage
+
+alias gitdiff=ydiff
+
