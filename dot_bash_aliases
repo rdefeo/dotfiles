@@ -3,6 +3,7 @@ source ~/src/advent/python/aliases.sh
 
 # bat - colorized cat, based on file type
 alias bat="batcat --style snip --theme 'Visual Studio Dark+'"
+alias cat=bat
 
 alias qflipper=~/src/flipperzero/qFlipper/build/qFlipper-x86_64.AppImage
 
