@@ -59,13 +59,9 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 _jobcount() {
-    local count
-    count=$(jobs -p | wc -l)
-    if (( $count == 0 )); then
-	echo ""
-    else
-	echo "($count) "
-    fi
+    local jobs=($(jobs -p))
+    local count=${#jobs[@]}
+    (($count)) && echo -n "(${count}) "
 }
 
 if [ "$color_prompt" = yes ]; then
