@@ -1,0 +1,11 @@
+set mouse # mouse click to set cursor pos
+set tabsize 2
+set autoindent # auto indent next line to current
+set constantshow # line numbers at bottom
+
+# line wrapping
+set softwrap
+set atblanks
+
+# display a scrollbar indicator
+set indicator
