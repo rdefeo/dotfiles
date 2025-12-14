@@ -37,7 +37,7 @@
       ansible.builtin.copy:
         dest: /etc/apt/sources.list.d/vscode.list
         content: |
-          deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.mircosoft.com/repos/code stable main
+          deb [arch=amd64,arm64,armhf signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main
 
     - name: Install packages
       ansible.builtin.apt:
