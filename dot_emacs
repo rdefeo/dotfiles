@@ -1,8 +1,5 @@
 ; stop creating ~ files
 (setq make-backup-files nil)
-(menu-bar-mode 0)
-(column-number-mode 1)
-(show-paren-mode 1)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'vscode-dark-plus t)
@@ -10,6 +7,8 @@
 (package-initialize)
 (add-to-list 'package-archives
 	     '("melpa" . "https://melpa.org/packages/"))
+(global-set-key (kbd "M-x") 'smex)
+
 
 ; Setup el-get
 (add-to-list 'load-path (expand-file-name "el-get/el-get" user-emacs-directory))
