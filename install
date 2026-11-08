@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# install all dot files to ~ via symlinks
+
+# iterate through all files in ./dotfiles/
+
+
+for f in $PWD/dotfiles/*; do
+    echo "SYMLINK: ln -nsfv $f $HOME/.${f##*/}"
+done
+
+mkdir -p "$HOME/.emacs.d/themes"
+echo "SYMLINK: ln -nsfv $PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
+
+# maybe download this instead?
+# wget -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/DejaVuSansMono.zip
+# then unzip just the file we need?
+#
+#mkdir -p "$HOME/.fonts"
+#echo "SYMLINK: ln -nsfv $PWD/DejaVuSansMNerdFontMono-Regular.ttf $HOME/.fonts/DejaVuSansMNerdFontMono-Regular.ttf"
+
+
