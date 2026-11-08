@@ -1,6 +1,6 @@
 [user]
 	email = rdefeo@gmail.com
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-[pull]
-	rebase = false
+[url "https://github.com/"]
+	insteadOf = git@github.com:
+[url "git@github.com:"]
+	pushInsteadOf = https://github.com/
