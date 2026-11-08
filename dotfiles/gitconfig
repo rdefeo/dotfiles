@@ -1,2 +1,6 @@
 [user]
 	email = rdefeo@gmail.com
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/
+[pull]
+	rebase = false
