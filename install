@@ -2,15 +2,13 @@
 #
 # install all dot files to ~ via symlinks
 
-# iterate through all files in ./dotfiles/
-
-
 for f in $PWD/dotfiles/*; do
-    echo "SYMLINK: ln -nsfv $f $HOME/.${f##*/}"
+    ln -nsfv "$f" "$HOME/.${f##*/}"
 done
 
+# deploy non dotfiles
 mkdir -p "$HOME/.emacs.d/themes"
-echo "SYMLINK: ln -nsfv $PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
+ln -nsfv "$PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
 
 # maybe download this instead?
 # wget -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/DejaVuSansMono.zip
