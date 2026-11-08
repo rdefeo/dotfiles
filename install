@@ -2,11 +2,12 @@
 #
 # install all dot files to ~ via symlinks
 
+## symlink dotfiles
 for f in $PWD/dotfiles/*; do
     ln -nsfv "$f" "$HOME/.${f##*/}"
 done
 
-# deploy non dotfiles
+## deploy non dotfiles
 mkdir -p "$HOME/.emacs.d/themes"
 ln -nsfv "$PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
 
@@ -17,4 +18,15 @@ ln -nsfv "$PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-
 #mkdir -p "$HOME/.fonts"
 #echo "SYMLINK: ln -nsfv $PWD/DejaVuSansMNerdFontMono-Regular.ttf $HOME/.fonts/DejaVuSansMNerdFontMono-Regular.ttf"
 
+## install packages
+
+if [ -f /etc/lsb-release ]; then
+    sudo apt-get update
+    sudo apt-get install -y ansible
+
+    ansible-playbook "$PWD/setup.yml" --ask-become-pass
+else
+    echo "Unsupported Linux distro"
+    exit
+fi
 
