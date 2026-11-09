@@ -9,7 +9,7 @@ done
 
 ## deploy non dotfiles
 mkdir -p "$HOME/.emacs.d/themes"
-ln -nsfv "$PWD/vscode-dark-plus-theme.el $HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
+ln -nsfv "$PWD/vscode-dark-plus-theme.el" "$HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
 
 # maybe download this instead?
 # wget -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/DejaVuSansMono.zip
