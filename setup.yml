@@ -49,7 +49,7 @@
          - gpg
          - tmux
          - emacs-nox
-         - neofetch
+         - fastfetch
          - apt-transport-https
          - elpa-yaml-mode
        state: present
