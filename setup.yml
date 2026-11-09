@@ -52,6 +52,7 @@
          - fastfetch
          - apt-transport-https
          - elpa-yaml-mode
+         - python3-pylsp
        state: present
 
     - name: Install Visual Studio Code

@@ -7,6 +7,7 @@
 (menu-bar-mode -1)
 (line-number-mode t)
 (column-number-mode t)
+(global-font-lock-mode t)
 
 (package-initialize)
 (add-to-list 'package-archives
@@ -15,19 +16,6 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is the old M-x
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-; Setup el-get
-(add-to-list 'load-path (expand-file-name "el-get/el-get" user-emacs-directory))
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
 
 ; Boilerplates for python files
 (auto-insert-mode 1)
@@ -39,9 +27,12 @@
        "#!/usr/bin/env python3" \n
        "")))
 
-; Configure jedi for auto-completion
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+; Python IDE features via the built-in LSP client (eglot) + pylsp
+; The server (python3-pylsp) is installed by setup.yml
+(add-hook 'python-mode-hook 'eglot-ensure)
+(add-hook 'python-ts-mode-hook 'eglot-ensure)
+; Show inline completion suggestions while typing (TAB to accept)
+(global-completion-preview-mode 1)
 
 
 (custom-set-variables
