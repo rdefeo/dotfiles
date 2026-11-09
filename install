@@ -24,7 +24,7 @@ if [ -f /etc/lsb-release ]; then
     sudo apt-get update
     sudo apt-get install -y ansible
 
-    ansible-playbook "$PWD/setup.yml" --ask-become-pass
+    sudo ansible-playbook "$PWD/setup.yml" --ask-become-pass
 else
     echo "Unsupported Linux distro"
     exit
