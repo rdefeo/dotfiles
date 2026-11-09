@@ -21,7 +21,7 @@ font_path="DejaVuSansMNerdFontMono-Regular.ttf"
 font_dest="$HOME/.fonts"
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT # cleanup after ourselves
-curl -fsSL -o "$tmp/$font_zip" "font_$url"
+curl -fsSL -o "$tmp/$font_zip" "$font_url"
 mkdir -p "$font_dest"
 unzip -o -j "$tmp/$font_zip" "$font_path" -d "$font_dest"
 
