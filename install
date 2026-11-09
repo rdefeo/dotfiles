@@ -11,12 +11,19 @@ done
 mkdir -p "$HOME/.emacs.d/themes"
 ln -nsfv "$PWD/vscode-dark-plus-theme.el" "$HOME/.emacs.d/themes/vscode-dark-plus-theme.el"
 
-# maybe download this instead?
-# wget -nv https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/DejaVuSansMono.zip
-# then unzip just the file we need?
-#
-#mkdir -p "$HOME/.fonts"
-#echo "SYMLINK: ln -nsfv $PWD/DejaVuSansMNerdFontMono-Regular.ttf $HOME/.fonts/DejaVuSansMNerdFontMono-Regular.ttf"
+mkdir -p "$HOME/.local/share/konsole"
+ln -nsfv "$PWD/konsole.profile" "$HOME/.local/share/konsole/konsole.profile"
+
+# download and install our font
+font_zip="DejaVuSansMono.zip"
+font_url="https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/$font_zip"
+font_path="DejaVuSansMNerdFontMono-Regular.ttf"
+font_dest="$HOME/.fonts"
+tmp=$(mktemp -d)
+trap 'rm -rf "$tmp"' EXIT # cleanup after ourselves
+curl -fsSL -o "$tmp/$font_zip" "font_$url"
+mkdir -p "$font_dest"
+unzip -o -j "$tmp/$font_zip" "$font_path" -d "$font_dest"
 
 ## install packages
 
