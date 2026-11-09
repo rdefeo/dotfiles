@@ -13,6 +13,7 @@ ln -nsfv "$PWD/vscode-dark-plus-theme.el" "$HOME/.emacs.d/themes/vscode-dark-plu
 
 mkdir -p "$HOME/.local/share/konsole"
 ln -nsfv "$PWD/konsole.profile" "$HOME/.local/share/konsole/konsole.profile"
+kwriteconfig6 --file konsolerc --group "Desktop Entry" --key DefaultProfile konsole.profile
 
 # download and install our font
 font_zip="DejaVuSansMono.zip"
